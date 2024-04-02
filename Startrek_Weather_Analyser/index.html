@@ -25,7 +25,7 @@
             //"<br>Longitude: " + position.coords.longitude;
             const pos_lat = position.coords.latitude;
             const pos_lon = position.coords.longitude;
-            const currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${pos_lat}&lon=${pos_lon}&appid=aee3b6c104644a310577bef795f0a601`;
+            const currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${pos_lat}&lon=${pos_lon}&appid={YOUR-API-KEY}`;
             fetch(currentWeatherUrl)
             .then(response => response.json())
             .then(data => {
