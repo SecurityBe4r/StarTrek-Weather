@@ -1,0 +1,19 @@
+#temp-div{
+    text-align: center;
+    margin-top: 2%;
+    font-family: sans-serif;
+    font-weight: bolder;
+    color: #ffffff;
+    font-size: 40px;
+}
+#st-comparison{
+    font-size: 50px;
+    color: #ffffff;
+    text-align: center;
+    margin-top: 20%;
+    font-family: sans-serif;
+    font-weight: bolder;
+}
+#all{
+    background-size: 100% 200%;
+}

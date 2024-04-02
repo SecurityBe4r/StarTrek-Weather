@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WeatherEquivaleinator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body onload="getLocation()" id="all">
+    <p id="st-comparison"></p>
+    <p id="temp-div">Temp: </p>
+    <p id="demo"></p>
+    <script>
+        const x = document.getElementById("demo");
+        
+        function getLocation() {
+          if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+          } else { 
+            x.innerHTML = "Geolocation is not supported by this browser.";
+          }
+        }
+        function showPosition(position) {
+            //x.innerHTML = "Latitude: " + position.coords.latitude + 
+            //"<br>Longitude: " + position.coords.longitude;
+            const pos_lat = position.coords.latitude;
+            const pos_lon = position.coords.longitude;
+            const currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${pos_lat}&lon=${pos_lon}&appid=aee3b6c104644a310577bef795f0a601`;
+            fetch(currentWeatherUrl)
+            .then(response => response.json())
+            .then(data => {
+                displayWeather(data);
+            })
+            .catch(error => {
+                console.error('Error fetching current weather data:', error);
+                alert('Error fetching current weather data. Please try again.');
+            });
+            function displayWeather(data) {
+                const tempDivInfo = document.getElementById('temp-div');
+                const temperature = Math.round(data.main.temp - 273.15);
+                tempDivInfo.innerHTML = "Temp: " + temperature + "C";
+                if(temperature > 18 && temperature < 32){
+                  document.getElementById('st-comparison').innerHTML = "Planet: Cardassia Prime";
+                  document.getElementById('all').style.backgroundImage = "url(Cardassia.jpg)";
+                }
+                else if(temperature > -15 && temperature < 14){
+                  document.getElementById('st-comparison').innerHTML = "Planet: Earth";
+                  document.getElementById('all').style.backgroundImage = "url(Earth.jpg)";
+                }
+                else if(temperature < -15){
+                  document.getElementById('st-comparison').innerHTML = "Planet: Andoria";
+                }
+                else if(temperature > 32){
+                  document.getElementById('st-comparison').innerHTML = "Planet: Vulcan";
+                }
+        }
+      }
+    </script>
+</body>
+</html>
